@@ -1,0 +1,13 @@
+{
+  "builds": [
+    {
+      "src": "next.config.ts",
+      "use": "@vercel/next",
+      "config": {
+        "prisma": {
+          "generate": true
+        }
+      }
+    }
+  ]
+}

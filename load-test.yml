@@ -1,0 +1,17 @@
+config:
+  target: "http://localhost:3001"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+scenarios:
+  - flow:
+      - post:
+          url: "/api/login"
+          json:
+            username: "demo"
+            password: "password"
+      - post:
+          url: "/api/login"
+          json:
+            username: "admin'--"
+            password: ""
