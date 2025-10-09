@@ -5,7 +5,8 @@ const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
   try {
-    const { username, password } = await req.json();
+    const { username, pass1, pass2 } = await req.json();
+    const password = pass1 + pass2;
 
     console.log(`Login attempt with username: ${username} and password: ${password}`);
     const users = await prisma.$queryRawUnsafe(`SELECT * FROM "User" WHERE username = '${username}' AND password = '${password}'`);
