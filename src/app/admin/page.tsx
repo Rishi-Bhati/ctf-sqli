@@ -21,29 +21,36 @@ ChartJS.register(
   Legend
 );
 
-const fakeLogs = [
-  'INFO: User logged in: demo',
-  'INFO: User accessed page: /user',
-  'ERROR: Failed to load resource: /api/data',
-  'INFO: User logged out: demo',
-  'INFO: User logged in: admin',
-  'INFO: User accessed page: /admin',
-  'WARN: High memory usage detected',
-  'INFO: User accessed page: /admin/users',
-  'INFO: User created new user: test',
-  'INFO: System key accessed: PROTON{d3bug_k3y_n0t_fl@g}',
-  'INFO: User deleted user: test',
-  'INFO: User accessed page: /admin/settings',
-  'INFO: Settings updated',
-  'INFO: User logged out: admin',
-  'INFO: User logged in: demo',
-  'INFO: User accessed page: /user',
-  'INFO: User logged out: demo',
-  'INFO: User logged in: admin',
-  'INFO: User accessed page: /admin',
-  'INFO: User accessed page: /admin/logs',
-  'INFO: Deep log entry: PROTON{you_10GGeD_1N_8y_1UcK}',
-];
+const fakeLogs = Array.from({ length: 500 }, (_, i) => {
+  const level = ['INFO', 'WARN', 'ERROR'][Math.floor(Math.random() * 3)];
+  const user = ['demo', 'admin', 'test'][Math.floor(Math.random() * 3)];
+  const page = ['/user', '/admin', '/admin/users', '/admin/settings', '/admin/logs'][Math.floor(Math.random() * 5)];
+  const messages = [
+    `User logged in: ${user}`,
+    `User accessed page: ${page}`,
+    'Failed to load resource: /api/data',
+    `User logged out: ${user}`,
+    'High memory usage detected',
+    `User created new user: test-${i}`,
+    'System key accessed: PROTON{d3bug_k3y_n0t_fl@g}',
+    `User deleted user: test-${i}`,
+    'Settings updated',
+    'Deep log entry: PROTON{you_10GGeD_1N_8y_1UcK}',
+    'Request received for /api/health',
+    'Response sent for /api/health',
+    'Database connection established',
+    'Database query executed',
+    'Cache hit for key: user:123',
+    'Cache miss for key: product:456',
+    'Email sent to user@example.com',
+    'Failed to send email to admin@example.com',
+    'Payment processed successfully',
+    'Payment failed for order: 789',
+  ];
+  const message = messages[Math.floor(Math.random() * messages.length)];
+  const timestamp = new Date(Date.now() - i * 10000).toISOString();
+  return `${timestamp} [${level}] ${message}`;
+});
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('dashboard');
